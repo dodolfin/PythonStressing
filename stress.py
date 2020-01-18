@@ -1,4 +1,4 @@
-import random, time, sys, subprocess, os
+import random, time, sys, subprocess, os, contextlib
 from random import randint
 
 def arr(n, minn, maxn):
@@ -81,18 +81,11 @@ kek = 0
 INF = 10 ** 9;
 worst_time_ok = -INF;
 worst_time_bad = -INF;
-print("Enter var's")
-temp = input()
-while temp != '':
-    exec(temp)
-    temp = input()
-
-print("Enter pattern");
+fin = open("pattern.txt", 'r')
 pattern = []
-temp = input()
-while temp != '':
-    pattern.append(temp)
-    temp = input()
+for i in fin.readlines():
+    pattern.append(i)
+print("pattern:", pattern)
 
 print("Enter count of iterations(-1 = INF)")
 it = int(input())
@@ -105,10 +98,8 @@ ok = input()
 
 print("Enter name of second solution(without .exe)")
 bad = input()
-
 os.system('g++ -std=c++17 -O2 -o' + ok + '.exe ' + ok + '.cpp')
 os.system('g++ -std=c++17 -O2 -o' + bad + '.exe ' + bad + '.cpp')
-
 test = ""
 
 ok = './' + ok + '.exe'
@@ -119,35 +110,16 @@ while (ansf == anss and kek != it):
     if (kek != 0):
         print("OK", kek)
 #------------------------------------------------------------------------
-    '''
-    a = [list(map(str, i.split())) for i in pattern]
-    test = ''
-    for i in a:
-        for j in i:
-            test += str(eval(j)) + ' '
-        test += '\n';
-    fout = open("test.txt", "w");
-    print(test, file = fout)
-    fout.close()
-    '''
-    test = ''
-    n = 5
-    k = 1
-    test += str(n) + ' ' + str(k) + '\n';
-    for i in range(n):
-        tl = randint(0, 10)
-        tr = randint(tl, 10);
-        test += str(tl) + ' ' + str(tr) + '\n'; 
-    for i in tree(n, 700):
-        test += str(i[0]) + ' ' + str(i[1]) + '\n';
-    fout = open("test.txt", "w");
-    print(test, file = fout)
-    fout.close()
+    a = ''.join(pattern)
+    print('a:', a)
+    with open('test.txt', 'w') as file, contextlib.redirect_stdout(file):
+        exec(a) 
+    exit(0)
 #------------------------------------------------------------------------
     kek += 1
     t1 = time.process_time()
     p = subprocess.Popen([ok, 'f'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)    
-    p_stdout = p.communicate(input=test.encode('ascii'))[0]
+    p_stdout = p.communicate(input=b'test.txt')[0]
     anss = p_stdout.decode()
     p.kill()
 
@@ -157,7 +129,7 @@ while (ansf == anss and kek != it):
     t0 = time.process_time() 
 
     p = subprocess.Popen([bad, 'f'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)    
-    p_stdout = p.communicate(input=test.encode('ascii'))[0]
+    p_stdout = p.communicate(input=b'test.txt')[0]
     ansf = p_stdout.decode()
     p.kill()
 
