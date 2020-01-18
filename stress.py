@@ -11,7 +11,8 @@ def seg(l, r):
     return ' '.join(map(str, [tl, tr]));
         
 def string(n, maxn):
-    a = [chr(random.randint(0, maxn % 26) + ord('a')) for i in range(n)]
+    maxn -= 'a'
+    a = [chr(random.randint(0, maxn) + ord('a')) for i in range(n)]
     return ''.join(a);
 
 def permutation(n):
