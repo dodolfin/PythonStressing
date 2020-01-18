@@ -86,7 +86,6 @@ fin = open("pattern.txt", 'r')
 pattern = []
 for i in fin.readlines():
     pattern.append(i)
-print("pattern:", pattern)
 
 print("Enter count of iterations(-1 = INF)")
 it = int(input())
@@ -112,7 +111,6 @@ while (ansf == anss and kek != it):
         print("OK", kek)
 #------------------------------------------------------------------------
     a = ''.join(pattern)
-    print('a:', a)
     with open('test.txt', 'w') as file, contextlib.redirect_stdout(file):
         exec(a) 
     exit(0)
