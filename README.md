@@ -21,4 +21,4 @@ You can use my functions to generate trees, permutations, strings e.t.c.
 
 5. run python3 stress.py
 6. follow script instructions
-7. get your verdict (OK, WA or TL) and last test in test.txt
+7. get your response (OK, WA or TL) and last test in test.txt
