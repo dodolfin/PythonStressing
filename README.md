@@ -6,6 +6,7 @@
 3. Move you right and wrong solutions cpp files to dir PythonStressing
 4. Write tests generator code to pattern.txt on python3.6 
 You can use my functions to generate trees, permutations, strings e.t.c.
+
     4.1. **arr(size, min_value, max_value)** - return array of integers
 
     4.2. **string(size, max_char)** - return string consisting of chars from 'a' to max_char in alphabetical order
