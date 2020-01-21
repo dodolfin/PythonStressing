@@ -1,5 +1,4 @@
-import random, time, sys, subprocess, os, contextlib
-from random import randint
+import time, sys, subprocess, os, contextlib
 
 ansf = 0
 anss = 0

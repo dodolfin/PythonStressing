@@ -1,3 +1,5 @@
+import random
+
 def arr(n, minn, maxn):
     a = [random.randint(minn, maxn) for i in range(n)];
     return ' '.join(map(str, a));
@@ -36,7 +38,7 @@ def tree(n, deep):
             s += ']'
             bal -= 1
             continue;
-        if (randint(0, 1000) <= deep):
+        if (random.randint(0, 1000) <= deep):
             bal += 1
             s += '['
         else:
