@@ -113,24 +113,25 @@ while (ansf == anss and kek != it):
     a = ''.join(pattern)
     with open('test.txt', 'w') as file, contextlib.redirect_stdout(file):
         exec(a) 
-    exit(0)
 #------------------------------------------------------------------------
     kek += 1
     t1 = time.process_time()
-    p = subprocess.Popen([ok, 'f'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)    
-    p_stdout = p.communicate(input=b'test.txt')[0]
-    anss = p_stdout.decode()
-    p.kill()
+    with open('test.txt', 'r') as f:
+        p = subprocess.Popen([ok, 'f'], stdout=subprocess.PIPE, stdin=f)    
+        p_stdout = p.communicate()[0]
+        anss = p_stdout.decode()
+        p.kill()
 
     print(time.process_time() - t1, "time", ok)
     worst_time_ok = max(time.process_time() - t1, worst_time_ok);
 
     t0 = time.process_time() 
 
-    p = subprocess.Popen([bad, 'f'], stdout=subprocess.PIPE, stdin=subprocess.PIPE)    
-    p_stdout = p.communicate(input=b'test.txt')[0]
-    ansf = p_stdout.decode()
-    p.kill()
+    with open('test.txt', 'r') as f:
+        p = subprocess.Popen([bad, 'f'], stdout=subprocess.PIPE, stdin=f)    
+        p_stdout = p.communicate()[0]
+        ansf = p_stdout.decode()
+        p.kill()
 
     print(time.process_time() - t0, "time", bad)
     worst_time_bad = max(time.process_time() - t0, worst_time_bad);
@@ -144,8 +145,5 @@ else:
     print("WA", kek, "You can find test in test.txt")
     print("ok answer:", anss);
     print("wrong answer:", ansf);
-fout = open("test.txt", "w");
-print(test, file = fout)
-fout.close()
 print("Worst time of GOOD solution is", worst_time_ok);
 print("Worst time of BAD solution is", worst_time_bad);
